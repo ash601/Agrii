@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Authentication ─────────────────────────────────
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         String   // FARMER or BUYER
+  phone        String?
+  state        String?
+  district     String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  chatSessions  ChatSession[]
+}
+
+// ─── Mandi Price Data ───────────────────────────────
+model MandiPrice {
+  id          String   @id @default(cuid())
+  state       String
+  district    String
+  market      String
+  commodity   String
+  variety     String
+  grade       String?
+  arrivalDate DateTime
+  minPrice    Float
+  maxPrice    Float
+  modalPrice  Float
+  createdAt   DateTime @default(now())
+
+  @@unique([state, market, commodity, variety, arrivalDate])
+  @@index([commodity])
+  @@index([state])
+  @@index([arrivalDate])
+}
+
+
+
+// ─── AI Chat ────────────────────────────────────────
+model ChatSession {
+  id        String        @id @default(cuid())
+  userId    String
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String?
+  createdAt DateTime      @default(now())
+  messages  ChatMessage[]
+
+  @@index([userId])
+}
+
+model ChatMessage {
+  id        String      @id @default(cuid())
+  sessionId String
+  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  role      String      // user or assistant
+  content   String
+  createdAt DateTime    @default(now())
+
+  @@index([sessionId])
+}

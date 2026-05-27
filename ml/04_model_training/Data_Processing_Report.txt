@@ -1,0 +1,39 @@
+====================================================================
+DATA PROCESSING & TRAINING REPORT: AGRITRADE PRICE PREDICTOR
+====================================================================
+
+If asked during your presentation: "What exactly did you do to the raw data to make the AI work?", use these simple, core arguments to explain your methodology.
+
+--------------------------------------------------------------------
+1. DATA CLEANING (Removing the Noise)
+--------------------------------------------------------------------
+* The Crux: AI cannot learn from blank spaces. 
+* What we did: We scanned the 737,000 rows and removed any rows that were missing the 'Modal_Price'. This ensures the AI only learns from complete, factual records.
+
+--------------------------------------------------------------------
+2. FEATURE ENGINEERING (Translating Text to Math)
+--------------------------------------------------------------------
+* The Crux: Machine Learning algorithms are giant calculators. They can only process numbers, never text or raw dates.
+* What we did: 
+  - Time Engineering: We split "15/06/2023" into separate numerical columns: Month (6), Day (15), Year (2023). This is how the AI learns "Seasonality" (e.g., prices always spike in Month 10).
+  - Label Encoding: We assigned a unique numerical ID to every text string. For example, the state "Maharashtra" became '14', and "Onion" became '3'. 
+
+--------------------------------------------------------------------
+3. THE 80/20 DATA SPLIT (The Classroom vs. The Exam)
+--------------------------------------------------------------------
+* The Crux: If an AI memorizes the answers, it is useless in the real world. We have to test it on data it has never seen.
+* What we did: We divided the data. 
+  - 80% Training Set: The AI studied this data to find the mathematical patterns connecting locations, dates, and prices.
+  - 20% Testing Set: We hid this data during training. We used it later as a final "exam" to prove the AI could accurately predict future prices.
+
+--------------------------------------------------------------------
+4. MODEL TRAINING (The Algorithm)
+--------------------------------------------------------------------
+* The Crux: We needed an algorithm that excels at finding complex, non-linear patterns in tabular data.
+* What we did: We selected a "Random Forest Regressor". It builds hundreds of mathematical "Decision Trees" to calculate exactly how much a specific State, Market, and Month impacts the final price of a Crop.
+
+--------------------------------------------------------------------
+5. EXPORTING THE BRAIN (Deployment Prep)
+--------------------------------------------------------------------
+* The Crux: We cannot retrain the AI on 737k rows every time a user clicks a button. It takes too long.
+* What we did: Once the AI passed its exam with high accuracy, we "froze" its brain and saved it as a file named 'price_predictor.pkl'. The web server simply loads this lightweight file to make instant predictions for the user.

@@ -1,0 +1,46 @@
+=========================================================================================================
+VISUAL DATA FLOW: FROM REACT TO THE AI BRAIN
+=========================================================================================================
+
+If you need to visually explain exactly where and how the data physically enters the AI, use this map. 
+It points directly to the exact lines of code in `api.py`.
+
+[ 1. REACT FRONTEND ] 
+   | (User selects "Maharashtra", "Onion" and clicks Predict)
+   v
+   { JSON Payload: {"state": "Maharashtra", "commodity": "Onion", "date": "2024-06-15"} }
+   | (Sent via HTTP POST to localhost:8000/predict)
+   v
+[ 2. FASTAPI SERVER (api.py) ] 
+   | 
+   | -> ARRIVAL (Line 29): `def predict_price(request: PredictionRequest):`
+   |    The server catches the JSON payload.
+   |
+   | -> PACKAGING (Lines 34-45): 
+   |    The server breaks the date apart and puts everything into a Python Dictionary.
+   |
+   | -> TRANSLATION (Line 54): `df[col] = encoders[col].transform(df[col])`
+   |    The server passes the text through the translation dictionary (`encoders.pkl`).
+   |    "Maharashtra" becomes 14. "Onion" becomes 3.
+   |
+   v
+   [ 3. PURE NUMERICAL MATRIX (df) ]
+   | ( The data now looks like this: [14, 52, 118, 3, 12, 0, 15, 6, 2024, 167, 24] )
+   |
+   | -> *** THE EXACT MOMENT OF TRANSFER *** (Line 61)
+   |    Code: `prediction = model.predict(df)`
+   |    This single line is exactly how the data is injected into the actual brain.
+   |    The variable `model` is the physical `price_predictor.pkl` file loaded in memory.
+   |    The `.predict()` command forces the brain to eat the data and calculate an answer.
+   v
+[ 4. THE XGBOOST BRAIN (price_predictor.pkl) ]
+   | (The brain runs the numbers through its decision trees in 0.01 seconds)
+   | -> Spits out the answer: 1250.45
+   v
+[ 5. THE RESPONSE (api.py) ]
+   | -> PACKAGING (Line 64):
+   |    { "predicted_price": 1250.45, "status": "success" }
+   |    The server shoots this package back over the internet to the user's browser.
+   v
+[ 6. REACT FRONTEND ]
+   | (The website receives 1250.45 and draws the final chart on the screen)

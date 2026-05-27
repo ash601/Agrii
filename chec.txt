@@ -1,0 +1,4 @@
+Class component vs funcitonal 
+
+React forms 
+Tattoo

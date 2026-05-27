@@ -1,0 +1,45 @@
+=========================================================================================================
+DATA TRANSFORMATION: BEFORE AND AFTER FEATURE ENGINEERING
+=========================================================================================================
+
+When explaining the Machine Learning pipeline, use this document to demonstrate exactly how the data 
+is transformed so the AI can understand it. Because this is a plain text file, the table will maintain 
+its look in any editor.
+
+---------------------------------------------------------------------------------------------------------
+1. THE RAW DATA (BEFORE TRANSFORMATION)
+---------------------------------------------------------------------------------------------------------
+This is the human-readable format that we download from the CSV file. It contains text strings and 
+date formats. Machine learning algorithms CANNOT perform math on this format.
+
+STATE         | DISTRICT    | MARKET      | COMMODITY | VARIETY | GRADE | PRICE DATE | MODAL_PRICE
+---------------------------------------------------------------------------------------------------------
+Maharashtra   | Nashik      | Lasalgaon   | Onion     | Other   | FAQ   | 15/06/2023 | 1250
+Rajasthan     | Chittorgarh | Nimbahera   | Wheat     | Other   | FAQ   | 06/06/2023 | 2300
+
+
+---------------------------------------------------------------------------------------------------------
+2. THE TRANSFORMED DATA (AFTER FEATURE ENGINEERING)
+---------------------------------------------------------------------------------------------------------
+After the Python script runs, the rows are completely rewritten into pure numerical matrices. 
+This is the exact format that gets fed into the AI algorithm:
+
+STATE | DISTRICT | MARKET | COMMODITY | VARIETY | GRADE | DAY | MONTH | YEAR | MODAL_PRICE
+---------------------------------------------------------------------------------------------------------
+14    | 52       | 118    | 3         | 12      | 0     | 15  | 6     | 2023 | 1250
+23    | 18       | 94     | 8         | 12      | 0     | 6   | 6     | 2023 | 2300
+
+
+---------------------------------------------------------------------------------------------------------
+KEY CONCEPTS TO EXPLAIN:
+---------------------------------------------------------------------------------------------------------
+1. Time Engineering: 
+The text string "15/06/2023" has been broken apart. The AI now receives three separate numerical 
+columns: 15, 6, and 2023. This is how the AI algorithm learns mathematical seasonality.
+
+2. Label Encoding: 
+The word "Maharashtra" has been permanently translated to 14, and "Onion" to 3. 
+
+3. The Math: 
+The AI algorithm (Random Forest Regressor) takes these integer inputs (14, 52, 118, 3...), multiplies 
+them by complex weights inside its decision trees, and accurately predicts the target variable: 1250.

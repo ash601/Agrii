@@ -1,0 +1,34 @@
+=========================================================================================================
+DEFENSE Q&A: HOW WE DECIDED THE NUMBERS (LABEL ENCODING)
+=========================================================================================================
+
+If an examiner or professor asks: "You changed words into numbers. How did you decide on those numbers? Did you just make them up manually?"
+
+This is a trap question to test if you understand the underlying mathematics. Use the following arguments to defend your methodology.
+
+---------------------------------------------------------------------------------------------------------
+1. THE SHORT ANSWER
+---------------------------------------------------------------------------------------------------------
+"No, we did not make them up, and we did not assign them manually. We used an algorithm called `LabelEncoder` from the Scikit-Learn library. The algorithm automatically scans the database and assigns IDs based on alphabetical order."
+
+---------------------------------------------------------------------------------------------------------
+2. HOW THE ALGORITHM WORKS UNDER THE HOOD
+---------------------------------------------------------------------------------------------------------
+If asked to elaborate on how LabelEncoder works, explain these three steps:
+1. It scans a text column (e.g., 'Commodity') and finds every unique crop in the entire 737,000 rows.
+2. It puts them in a list and sorts them strictly alphabetically.
+3. It assigns the integer '0' to the first item, '1' to the second, '2' to the third, and so on.
+
+EXAMPLE TO GIVE THE PROFESSOR:
+If the database only contained Apple, Onion, Potato, and Wheat, the computer does this:
+* Apple  = 0
+* Onion  = 1
+* Potato = 2
+* Wheat  = 3
+
+---------------------------------------------------------------------------------------------------------
+3. THE CRITICAL 'BONUS' DEFENSE (How to impress the examiner)
+---------------------------------------------------------------------------------------------------------
+Make sure to proactively state the following to prove you understand Machine Learning behavior:
+
+"It is critical to note that these numbers are purely ID tags. Just because Wheat is assigned '3' and Apple is assigned '0' does not mean Wheat is mathematically 'greater' or 'more important' than Apple. We chose the Random Forest algorithm specifically because it is smart enough to treat these Label Encoded numbers as separate, unique categories, not as a numerical ranking system."

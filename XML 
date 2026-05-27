@@ -1,0 +1,119 @@
+
+XML scheme support Data types 
+
+One of the grest strethg of XML is the support of data types.
+
+
+
+# XMLValidation
+Xmle schema validation (XSD)
+
+
+
+Store the student infor in an XML file and validate is using 
+XML schema defination
+
+<?xml version="1.0" encoding="UTF-8"?>
+<students xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="students.xsd">
+
+  <student>
+    <id>STU001</id>
+    <n>
+      <firstName>Anshul</firstName>
+      <lastName>Sharma</lastName>
+    </n>
+    <age>21</age>
+    <gender>Male</gender>
+    <email>anshul.sharma@example.com</email>
+    <phone>9876543210</phone>
+    <department>Computer Science Engineering</department>
+    <semester>6</semester>
+    <cgpa>8.75</cgpa>
+    <address>
+      <street>42 Hill View Road</street>
+      <city>Dehradun</city>
+      <state>Uttarakhand</state>
+      <pincode>248001</pincode>
+    </address>
+    <enrollmentYear>2022</enrollmentYear>
+    <status>Active</status>
+  </student>
+
+  <student>
+    <id>STU002</id>
+    <n>
+      <firstName>Priya</firstName>
+      <lastName>Verma</lastName>
+    </n>
+    <age>20</age>
+    <gender>Female</gender>
+    <email>priya.verma@example.com</email>
+    <phone>9123456780</phone>
+    <department>Electronics Engineering</department>
+    <semester>4</semester>
+    <cgpa>9.10</cgpa>
+    <address>
+      <street>15 Green Park Colony</street>
+      <city>Haridwar</city>
+      <state>Uttarakhand</state>
+      <pincode>249401</pincode>
+    </address>
+    <enrollmentYear>2023</enrollmentYear>
+    <status>Active</status>
+  </student>
+
+  <student>
+    <id>STU003</id>
+    <n>
+      <firstName>Rahul</firstName>
+      <lastName>Negi</lastName>
+    </n>
+    <age>22</age>
+    <gender>Male</gender>
+    <email>rahul.negi@example.com</email>
+    <phone>9988776655</phone>
+    <department>Mechanical Engineering</department>
+    <semester>8</semester>
+    <cgpa>7.60</cgpa>
+    <address>
+      <street>7 Rajpur Road</street>
+      <city>Dehradun</city>
+      <state>Uttarakhand</state>
+      <pincode>248009</pincode>
+    </address>
+    <enrollmentYear>2021</enrollmentYear>
+    <status>Active</status>
+  </student>
+
+  <student>
+    <id>STU004</id>
+    <n>
+      <firstName>Sneha</firstName>
+      <lastName>Rawat</lastName>
+    </n>
+    <age>21</age>
+    <gender>Female</gender>
+    <email>sneha.rawat@example.com</email>
+    <phone>9812345670</phone>
+    <department>Computer Science Engineering</department>
+    <semester>6</semester>
+    <cgpa>8.20</cgpa>
+    <address>
+      <street>3 Subhash Nagar</street>
+      <city>Rishikesh</city>
+      <state>Uttarakhand</state>
+      <pincode>249201</pincode>
+    </address>
+    <enrollmentYear>2022</enrollmentYear>
+    <status>Inactive</status>
+  </student>
+
+</students>
+
+DOCTTYPE - A2
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+

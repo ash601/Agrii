@@ -1,0 +1,34 @@
+=========================================================================================================
+API DOCUMENTATION & DEFENSE: CONNECTING THE UI TO THE AI
+=========================================================================================================
+
+If an examiner asks: "How does your React website actually talk to this Python Machine Learning model?"
+
+Use this document to explain exactly how the data flows from the user's click to the final prediction.
+
+---------------------------------------------------------------------------------------------------------
+THE 5-STEP DATA FLOW
+---------------------------------------------------------------------------------------------------------
+
+STEP 1: The Request (Frontend -> Backend)
+When the user clicks "Predict" on the React dashboard, the website sends a JSON POST request to our FastAPI server (`http://localhost:8000/predict`). 
+It sends raw text: e.g., State: "Maharashtra", Market: "Lasalgaon", Date: "2024-06-15".
+
+STEP 2: Time Engineering (Inside the API)
+The AI cannot read "2024-06-15". Our Python API instantly intercepts the request and mathematically breaks the date down into Day (15), Month (6), Year (2024), DayOfYear (167), and WeekOfYear (24). 
+
+STEP 3: Text Translation (Label Encoding)
+The API loads the `encoders.pkl` file (the dictionaries we created in Step 3). It translates the incoming text ("Maharashtra", "Lasalgaon") into the exact same numerical IDs the AI was trained on (e.g., 14, 85).
+
+STEP 4: The Brain Calculates
+Now that the data is purely numerical, the API feeds it into the `price_predictor.pkl` file (the XGBoost brain). The algorithm calculates the mathematical relationships and outputs a raw float number (e.g., 1250.45).
+
+STEP 5: The Response (Backend -> Frontend)
+The API rounds the number to two decimal places, packages it back into a clean JSON response, and shoots it back to the React website. The React website then plots this number on the chart. 
+
+All of this happens in less than 50 milliseconds.
+
+---------------------------------------------------------------------------------------------------------
+WHY THIS ARCHITECTURE IS PROFESSIONAL
+---------------------------------------------------------------------------------------------------------
+By physically separating the Machine Learning engine (Python) from the UI (React/Node.js), we have built a "Microservices Architecture". This ensures that if the React website crashes, the AI is unaffected. It also allows us to upgrade the AI model in the future without ever having to touch or break the website code.

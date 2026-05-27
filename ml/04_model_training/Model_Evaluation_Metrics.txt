@@ -1,0 +1,46 @@
+=========================================================================================================
+DEFENSE Q&A: HOW WE EVALUATED THE ML MODEL (METRICS & FORMULAS)
+=========================================================================================================
+
+If an examiner asks: "How did you check if your model is actually accurate? What mathematical formulas did you use to grade it?"
+
+Use this document to explain exactly how the evaluation was performed.
+
+---------------------------------------------------------------------------------------------------------
+1. HOW WE CHECKED IT (The Methodology)
+---------------------------------------------------------------------------------------------------------
+We used the "Train-Test Split" methodology.
+* We hid 20% of the data (the Test Set) from the AI during training.
+* After training, we forced the AI to predict the prices for that 20% Test Set.
+* We then mathematically compared the AI's predictions (y_pred) to the actual real-world prices (y_true) to see how far off it was.
+
+We graded the AI using two industry-standard mathematical metrics:
+
+---------------------------------------------------------------------------------------------------------
+2. METRIC 1: R-Squared (R²) - The "Accuracy" Score
+---------------------------------------------------------------------------------------------------------
+What it is: 
+R-Squared tells us what percentage of the variance in the price is predictable from the data features (State, Crop, Date). A score of 1.0 is perfect. A score of 0.0 means the model is guessing blindly.
+
+Our Score: 
+0.932 (This means our model mathematically explains 93.2% of agricultural price movements).
+
+The Formula:
+R² = 1 - ( SSR / SST )
+* SSR (Sum of Squared Residuals): The sum of the squared differences between the ACTUAL price and the PREDICTED price.
+* SST (Total Sum of Squares): The sum of the squared differences between the ACTUAL price and the AVERAGE price.
+
+---------------------------------------------------------------------------------------------------------
+3. METRIC 2: Mean Absolute Error (MAE) - The "Error Margin"
+---------------------------------------------------------------------------------------------------------
+What it is: 
+MAE tells us exactly how many Rupees our model's predictions are wrong by, on average. Unlike MSE (Mean Squared Error), MAE does not severely penalize extreme outliers, making it much more interpretable for human economics.
+
+Our Score: 
+₹226.08 (On average, our prediction is only off by 226 Rupees).
+
+The Formula:
+MAE = (1 / n) * Σ | y_true - y_pred |
+* n = The total number of predictions made.
+* Σ = Summation (add them all up).
+* | y_true - y_pred | = The absolute difference between the actual real-world price and the AI's predicted price.
